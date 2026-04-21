@@ -396,7 +396,7 @@ import { ChevronRight, Layers, GitBranch, Cpu, Globe, ArrowUpRight, Code2, Datab
 						{
 							title: 'Analyste Programmeur & Développeur',
 							company: 'TERRAIN.NET',
-							period: 'Mars 2022 — Févr 2025',
+							period: 'Mars 2022 — 2024',
 							type: 'Freelance',
 							desc: 'Conception d\'un CRM terrain pour commerciaux. Plateforme de sondage électoral haute disponibilité. Optimisation de bases de données SQL pour des flux de données massifs.',
 							achievements: [
@@ -429,6 +429,23 @@ import { ChevronRight, Layers, GitBranch, Cpu, Globe, ArrowUpRight, Code2, Datab
 							</ul>
 						</div>
 					))}
+
+					<!-- Formation -->
+					<div class="pl-8 pt-6 border-t border-[var(--border-primary)] reveal">
+						<p class="case-label mb-4">Formation académique</p>
+						<div class="grid sm:grid-cols-2 gap-3">
+							{[
+								{ org: 'IFRI', year: '2021', title: 'Licence en Informatique', sub: 'Institut de Formation et de Recherche en Informatique' },
+								{ org: 'Lycée Kpondehou', year: '2017', title: 'Diplôme du Technicien (DT)', sub: 'Série informatique' },
+							].map(f => (
+								<div class="p-4 rounded-xl bg-[var(--card-bg)] border border-[var(--border-primary)] hover:border-[var(--border-accent)] transition-colors">
+									<p class="text-xs text-[var(--acc-blue)] font-bold mb-1">{f.org} · {f.year}</p>
+									<p class="text-sm font-semibold text-[var(--text-primary)]">{f.title}</p>
+									<p class="text-xs text-[var(--text-muted)] mt-0.5">{f.sub}</p>
+								</div>
+							))}
+						</div>
+					</div>
 
 					<!-- Certifications -->
 					<div class="pl-8 pt-6 border-t border-[var(--border-primary)] reveal">
