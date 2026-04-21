@@ -396,6 +396,8 @@ import { ChevronRight, Layers, GitBranch, Cpu, Globe, ArrowUpRight, Code2, Datab
 						{
 							title: 'Analyste Programmeur & Développeur',
 							company: 'TERRAIN.NET',
+							location: 'France',
+							remote: true,
 							period: 'Mars 2022 — 2024',
 							type: 'Freelance',
 							desc: 'Conception d\'un CRM terrain pour commerciaux. Plateforme de sondage électoral haute disponibilité. Optimisation de bases de données SQL pour des flux de données massifs.',
@@ -414,7 +416,8 @@ import { ChevronRight, Layers, GitBranch, Cpu, Globe, ArrowUpRight, Code2, Datab
 								<span class="badge badge-blue">{exp.type}</span>
 							</div>
 							<h3 class="text-xl font-bold mt-1 text-[var(--text-primary)]">{exp.title}</h3>
-							<p class="text-sm font-semibold text-[var(--text-secondary)] mb-4">{exp.company}</p>
+							<p class="text-sm font-semibold text-[var(--text-secondary)]">{exp.company}{exp.location ? <span class="font-normal text-[var(--text-muted)]"> · {exp.location}</span> : ""}</p>
+							{exp.remote && <p class="text-xs text-emerald-400 font-medium mb-3">🌐 Télétravail</p>}
 							<p class="text-[var(--text-secondary)] text-sm leading-relaxed mb-4">{exp.desc}</p>
 							<ul class="space-y-1.5">
 								{exp.achievements.map(a => (
