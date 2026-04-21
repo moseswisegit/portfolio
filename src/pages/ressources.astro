@@ -1,0 +1,125 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { resources, type Category } from '../data/ressources';
+import { Search, Filter } from 'lucide-react';
+
+const categories: (Category | 'All')[] = ['All', 'IA', 'Frontend', 'Backend', 'Mobile', 'DevOps', 'Architecture', 'UX'];
+---
+
+<Layout title="Ressources">
+  <div class="container mx-auto px-6 py-20">
+    <div class="max-w-2xl mb-12">
+      <h1 class="text-4xl font-bold mb-4 font-display text-[var(--text-primary)]">Ma Curation Technologique</h1>
+      <p class="text-[var(--text-secondary)]">
+        Une sélection rigoureuse de ressources collectées au fil de mes recherches. 
+        Chaque lien est accompagné d'une note sur son intérêt architectural ou technique.
+      </p>
+    </div>
+
+    <!-- Search and Filters Section -->
+    <div class="flex flex-col lg:flex-row gap-6 mb-12 items-center justify-between">
+      <!-- Search Input -->
+      <div class="relative w-full lg:max-w-md">
+        <Search class="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-secondary)] opacity-50" size={18} />
+        <input 
+          type="text" 
+          id="search-input"
+          placeholder="Rechercher par titre ou tags..." 
+          class="w-full pl-10 pr-4 py-3 bg-[var(--card-bg)] border border-[var(--border-primary)] rounded-xl focus:outline-none focus:border-[var(--acc-blue)]/50 transition-all text-sm text-[var(--text-primary)]"
+        />
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="flex flex-wrap gap-2 p-1 bg-[var(--card-bg)] border border-[var(--border-primary)] rounded-xl w-full lg:w-auto overflow-x-auto">
+        {categories.map(cat => (
+          <button
+            class="filter-tab px-4 py-2 rounded-lg text-xs font-medium transition-all hover:bg-[var(--text-primary)]/5 text-[var(--text-secondary)] whitespace-nowrap"
+            data-category={cat}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Resources Grid -->
+    <div id="resources-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {resources.map(res => (
+        <div 
+          class="resource-wrapper h-full" 
+          data-category={res.category}
+          data-title={res.title.toLowerCase()}
+          data-tags={res.tags.join(' ').toLowerCase()}
+        >
+          <ResourceCard resource={res} />
+        </div>
+      ))}
+    </div>
+
+    <!-- Empty State -->
+    <div id="empty-state" class="hidden py-20 text-center">
+      <p class="text-[var(--text-secondary)] italic">Aucune ressource ne correspond à votre recherche.</p>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Filter and Search Logic
+  const searchInput = document.getElementById('search-input') as HTMLInputElement;
+  const filterTabs = document.querySelectorAll('.filter-tab');
+  const resourceWrappers = document.querySelectorAll('.resource-wrapper');
+  const emptyState = document.getElementById('empty-state');
+
+  let currentCategory = 'All';
+  let currentSearch = '';
+
+  function updateDisplay() {
+    let visibleCount = 0;
+
+    resourceWrappers.forEach((wrapper: any) => {
+      const category = wrapper.getAttribute('data-category');
+      const title = wrapper.getAttribute('data-title');
+      const tags = wrapper.getAttribute('data-tags');
+
+      const matchesCategory = currentCategory === 'All' || category === currentCategory;
+      const matchesSearch = title.includes(currentSearch) || tags.includes(currentSearch);
+
+      if (matchesCategory && matchesSearch) {
+        wrapper.style.display = 'block';
+        visibleCount++;
+      } else {
+        wrapper.style.display = 'none';
+      }
+    });
+
+    if (visibleCount === 0) {
+      emptyState?.classList.remove('hidden');
+    } else {
+      emptyState?.classList.add('hidden');
+    }
+  }
+
+  // Event Listeners for Search
+  searchInput?.addEventListener('input', (e) => {
+    currentSearch = (e.target as HTMLInputElement).value.toLowerCase();
+    updateDisplay();
+  });
+
+  // Event Listeners for Categories
+  filterTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Update UI state
+      filterTabs.forEach(t => t.classList.remove('bg-gray-200', 'dark:bg-white/10', 'text-[var(--text-primary)]', 'shadow-sm'));
+      tab.classList.add('bg-gray-200', 'dark:bg-white/10', 'text-[var(--text-primary)]', 'shadow-sm');
+
+      currentCategory = tab.getAttribute('data-category') || 'All';
+      updateDisplay();
+    });
+  });
+
+  // Init UI
+  const allTab = document.querySelector('[data-category="All"]');
+  allTab?.classList.add('bg-gray-200', 'dark:bg-white/10', 'text-[var(--text-primary)]', 'shadow-sm');
+</script>
+

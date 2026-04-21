@@ -1,0 +1,255 @@
+---
+import { Menu, X, ArrowUpRight } from 'lucide-react';
+import '@fontsource-variable/inter';
+import '@fontsource/geist-sans';
+import '@fontsource/geist-mono';
+import '../styles/global.css';
+import ThemeToggle from '../components/ThemeToggle.astro';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const {
+	title,
+	description = "Moïse Agbossaga — Expert Flutter & Développeur Full Stack. Applications mobiles haute performance, offline-first et systèmes scalables orientés impact."
+} = Astro.props;
+
+const pathname = new URL(Astro.request.url).pathname;
+
+const navLinks = [
+	{ href: '/portfolio/', label: 'Accueil' },
+	{ href: '/portfolio/projets/', label: 'Case Studies' },
+	{ href: '/portfolio/ressources/', label: 'Ressources' },
+];
+
+const categories = [
+	{ name: 'Frontend', img: '/portfolio/images/categories/frontend.png', desc: 'Frameworks, UI & Motion', href: '/portfolio/ressources/?cat=Frontend' },
+	{ name: 'Backend', img: '/portfolio/images/categories/backend.png', desc: 'API, Cloud & Data', href: '/portfolio/ressources/?cat=Backend' },
+	{ name: 'Mobile', img: '/portfolio/images/categories/mobile.png', desc: 'Flutter & Native Apps', href: '/portfolio/ressources/?cat=Mobile' },
+	{ name: 'Architecture', img: '/portfolio/images/categories/architecture.png', desc: 'Patterns & Systèmes', href: '/portfolio/ressources/?cat=Architecture' },
+	{ name: 'UX & Design', img: '/portfolio/images/categories/ux.png', desc: 'Aesthetics & Assets', href: '/portfolio/ressources/?cat=UX' },
+];
+
+const isActive = (href: string) => {
+	if (href === '/portfolio/' && pathname === '/portfolio/') return true;
+	if (href !== '/portfolio/' && pathname.startsWith(href)) return true;
+	return false;
+};
+---
+
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} | MosesWise — Expert Flutter</title>
+		<meta name="description" content={description} />
+		<meta name="author" content="Moïse Agbossaga" />
+		<meta property="og:title" content={`${title} | MosesWise — Expert Flutter`} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="robots" content="index, follow" />
+
+		<!-- Theme init (no flash) -->
+		<script is:inline>
+			const theme = (() => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+				return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+			})();
+			document.documentElement.classList.toggle('dark', theme === 'dark');
+		</script>
+	</head>
+
+	<body class="min-h-screen flex flex-col bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300">
+
+		<!-- ── HEADER ── -->
+		<header class="sticky top-0 z-50 border-b border-[var(--border-primary)] bg-[var(--bg-primary)]/85 backdrop-blur-xl">
+			<nav class="container mx-auto px-6 h-16 flex items-center justify-between">
+
+				<!-- Logo -->
+				<a href="/portfolio/" class="group flex items-center gap-2.5">
+					<div class="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+						<span class="text-white text-xs font-bold font-mono">MW</span>
+					</div>
+					<span class="text-sm font-bold font-display text-[var(--text-primary)] group-hover:text-[var(--acc-blue)] transition-colors">
+						MosesWise
+					</span>
+					<span class="hidden sm:inline text-[10px] font-mono text-[var(--text-muted)] border border-[var(--border-primary)] rounded px-1.5 py-0.5">
+						Expert Flutter
+					</span>
+				</a>
+
+				<!-- Desktop nav -->
+				<div class="hidden md:flex items-center gap-1">
+					<a href="/portfolio/" class={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${isActive('/portfolio/') ? 'text-[var(--acc-blue)] bg-[var(--acc-blue)]/5' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--card-bg)]'}`}>
+						Accueil
+					</a>
+					<a href="/portfolio/projets/" class={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${isActive('/portfolio/projets/') ? 'text-[var(--acc-blue)] bg-[var(--acc-blue)]/5' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--card-bg)]'}`}>
+						Case Studies
+					</a>
+
+					<!-- Resources mega menu -->
+					<div class="relative group h-16 flex items-center">
+						<a href="/portfolio/ressources/" class={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${pathname.includes('ressources') ? 'text-[var(--acc-blue)] bg-[var(--acc-blue)]/5' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--card-bg)]'}`}>
+							Ressources
+							<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:rotate-180">
+								<path d="m6 9 6 6 6-6"/>
+							</svg>
+						</a>
+						<div class="absolute top-16 left-1/2 -translate-x-1/2 w-[520px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 translate-y-2 group-hover:translate-y-0">
+							<div class="bg-[var(--bg-primary)] border border-[var(--border-primary)] rounded-2xl shadow-2xl p-5 grid grid-cols-2 gap-3">
+								{categories.map(cat => (
+									<a href={cat.href} class="flex items-center gap-3 p-3 rounded-xl hover:bg-[var(--card-bg)] transition-colors group/item">
+										<div class="w-12 h-12 rounded-lg overflow-hidden border border-[var(--border-primary)] flex-shrink-0">
+											<img src={cat.img} alt={cat.name} class="w-full h-full object-cover group-hover/item:scale-110 transition-transform" />
+										</div>
+										<div>
+											<p class="text-sm font-semibold text-[var(--text-primary)]">{cat.name}</p>
+											<p class="text-xs text-[var(--text-muted)]">{cat.desc}</p>
+										</div>
+									</a>
+								))}
+							</div>
+						</div>
+					</div>
+
+					<div class="w-px h-4 bg-[var(--border-primary)] mx-2"></div>
+					<a href="https://linkedin.com/in/agbossagamoise" target="_blank" rel="noopener" class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--card-bg)] transition-colors">
+						LinkedIn
+						<ArrowUpRight size={12} />
+					</a>
+					<ThemeToggle />
+				</div>
+
+				<!-- Mobile controls -->
+				<div class="flex md:hidden items-center gap-3">
+					<ThemeToggle />
+					<button id="mobile-menu-toggle" class="p-2 rounded-lg text-[var(--text-secondary)] hover:bg-[var(--card-bg)] transition-colors" aria-label="Menu">
+						<Menu size={20} id="menu-icon" />
+						<X size={20} id="close-icon" class="hidden" />
+					</button>
+				</div>
+			</nav>
+
+			<!-- Mobile menu -->
+			<div id="mobile-menu" class="hidden md:hidden border-t border-[var(--border-primary)] bg-[var(--bg-primary)] p-5 space-y-1">
+				<a href="/portfolio/" class={`block px-4 py-3 rounded-xl text-sm font-medium ${isActive('/portfolio/') ? 'text-[var(--acc-blue)] bg-[var(--acc-blue)]/5' : 'text-[var(--text-secondary)]'}`}>Accueil</a>
+				<a href="/portfolio/projets/" class={`block px-4 py-3 rounded-xl text-sm font-medium ${isActive('/portfolio/projets/') ? 'text-[var(--acc-blue)] bg-[var(--acc-blue)]/5' : 'text-[var(--text-secondary)]'}`}>Case Studies</a>
+				<a href="/portfolio/ressources/" class={`block px-4 py-3 rounded-xl text-sm font-medium ${pathname.includes('ressources') ? 'text-[var(--acc-blue)] bg-[var(--acc-blue)]/5' : 'text-[var(--text-secondary)]'}`}>Ressources</a>
+				<div class="pt-3 border-t border-[var(--border-primary)] mt-3">
+					<a href="https://linkedin.com/in/agbossagamoise" target="_blank" rel="noopener" class="flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-[var(--text-secondary)]">
+						LinkedIn <ArrowUpRight size={14} />
+					</a>
+				</div>
+			</div>
+		</header>
+
+		<main class="flex-grow">
+			<slot />
+		</main>
+
+		<!-- ── FOOTER ── -->
+		<footer class="border-t border-[var(--border-primary)] bg-[var(--bg-secondary)]">
+			<div class="container mx-auto px-6 py-16">
+				<div class="grid md:grid-cols-3 gap-12 mb-12">
+					<!-- Brand -->
+					<div>
+						<div class="flex items-center gap-2.5 mb-4">
+							<div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+								<span class="text-white text-xs font-bold font-mono">MW</span>
+							</div>
+							<span class="font-bold font-display text-[var(--text-primary)]">MosesWise</span>
+						</div>
+						<p class="text-sm text-[var(--text-muted)] leading-relaxed max-w-xs">
+							Expert Flutter & Développeur Full Stack. Je construis des applications mobiles performantes, scalables et conçues pour durer.
+						</p>
+						<div class="flex items-center gap-2 mt-5">
+							<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+							<span class="text-xs text-[var(--text-muted)]">Disponible pour missions</span>
+						</div>
+					</div>
+
+					<!-- Navigation -->
+					<div>
+						<p class="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-5">Navigation</p>
+						<ul class="space-y-3">
+							{[
+								{ href: '/portfolio/', label: 'Accueil' },
+								{ href: '/portfolio/projets/', label: 'Case Studies' },
+								{ href: '/portfolio/ressources/', label: 'Ressources' },
+							].map(link => (
+								<li>
+									<a href={link.href} class="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+										{link.label}
+									</a>
+								</li>
+							))}
+						</ul>
+					</div>
+
+					<!-- Contact -->
+					<div>
+						<p class="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-5">Contact</p>
+						<ul class="space-y-3">
+							<li>
+								<a href="mailto:githubmoseswise@gmail.com" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors flex items-center gap-2">
+									githubmoseswise@gmail.com
+								</a>
+							</li>
+							<li>
+								<a href="https://linkedin.com/in/agbossagamoise" target="_blank" rel="noopener" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors flex items-center gap-1.5">
+									LinkedIn <ArrowUpRight size={12} />
+								</a>
+							</li>
+							<li>
+								<a href="https://github.com/githubmoseswise" target="_blank" rel="noopener" class="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors flex items-center gap-1.5">
+									GitHub <ArrowUpRight size={12} />
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="pt-8 border-t border-[var(--border-primary)] flex flex-col sm:flex-row items-center justify-between gap-4">
+					<p class="text-xs text-[var(--text-muted)]">
+						© {new Date().getFullYear()} Moïse Agbossaga (MosesWise). Expert Flutter & Développeur Full Stack.
+					</p>
+					<div class="flex items-center gap-2">
+						<span class="text-xs font-mono text-[var(--text-muted)]">Built with</span>
+						<span class="badge badge-blue text-[10px]">Astro 5</span>
+						<span class="badge badge-purple text-[10px]">React</span>
+						<span class="badge badge-cyan text-[10px]">Tailwind</span>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<!-- Mobile menu script -->
+		<script>
+			const toggle = document.getElementById('mobile-menu-toggle');
+			const menu = document.getElementById('mobile-menu');
+			const menuIcon = document.getElementById('menu-icon');
+			const closeIcon = document.getElementById('close-icon');
+
+			toggle?.addEventListener('click', () => {
+				const hidden = menu?.classList.toggle('hidden');
+				menuIcon?.classList.toggle('hidden', !hidden);
+				closeIcon?.classList.toggle('hidden', !!hidden);
+			});
+
+			menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+				menu?.classList.add('hidden');
+				menuIcon?.classList.remove('hidden');
+				closeIcon?.classList.add('hidden');
+			}));
+		</script>
+	</body>
+</html>

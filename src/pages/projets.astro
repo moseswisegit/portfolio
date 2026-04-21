@@ -1,0 +1,512 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { projects } from '../data/projects';
+import { ExternalLink, Github, Smartphone, Globe, Map, Layers, ChevronRight, Search, X, ArrowUpRight, Code2, Target, GitBranch, AlertTriangle } from 'lucide-react';
+
+const categoryIcons = {
+  Mobile: Smartphone,
+  Web: Globe,
+  SIG: Map,
+  Fullstack: Layers
+};
+
+const statusConfig = {
+  'Terminé': { classes: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20', dot: 'bg-emerald-500' },
+  'En cours': { classes: 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20', dot: 'bg-amber-500 animate-pulse' },
+  'Idée': { classes: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20', dot: 'bg-blue-500' },
+};
+---
+
+<Layout
+	title="Projets & Case Studies"
+	description="Case studies d'architecture logicielle : problèmes, contraintes, décisions architecturales, trade-offs et résultats. Par Moïse Agbossaga, Architecte Logiciel."
+>
+	<div class="py-24 container mx-auto px-6">
+
+		<!-- Header -->
+		<div class="max-w-3xl mb-20 reveal">
+			<p class="section-label">
+				<Code2 size={14} />
+				Case Studies
+			</p>
+			<h1 class="text-4xl md:text-6xl font-bold font-display mb-6 text-[var(--text-primary)] tracking-tight leading-tight">
+				Problèmes réels.<br/>
+				<span class="gradient-text">Décisions justifiées.</span>
+			</h1>
+			<p class="text-[var(--text-secondary)] text-lg leading-relaxed max-w-2xl">
+				Chaque projet est présenté comme un architecte le penserait : problème, contraintes, décisions techniques, trade-offs explicites et impact mesuré.
+			</p>
+		</div>
+
+		<!-- Filters -->
+		<div class="flex flex-col lg:flex-row gap-5 mb-14 items-start lg:items-center justify-between">
+			<div class="relative w-full lg:max-w-md">
+				<Search class="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" size={18} />
+				<input
+					type="text"
+					id="search-input"
+					placeholder="Rechercher par titre, techno..."
+					class="w-full pl-11 pr-4 py-3 bg-[var(--card-bg)] border border-[var(--border-primary)] rounded-xl focus:outline-none focus:border-[var(--border-accent)] transition-all text-sm text-[var(--text-primary)]"
+				/>
+			</div>
+
+			<div class="flex flex-col gap-3 w-full lg:w-auto">
+				<div class="flex flex-wrap gap-2">
+					{['All', 'Web', 'Mobile', 'SIG', 'Fullstack'].map(cat => (
+						<button
+							class="filter-tab px-4 py-2 rounded-lg text-xs font-bold transition-all text-[var(--text-secondary)] border border-[var(--border-primary)] hover:border-[var(--border-accent)] hover:text-[var(--text-primary)]"
+							data-filter-type="category"
+							data-filter-value={cat}
+						>
+							{cat === 'All' ? 'Tout' : cat}
+						</button>
+					))}
+				</div>
+				<div class="flex flex-wrap gap-2">
+					{[
+						{ label: 'Tous', value: 'All' },
+						{ label: '✦ Terminé', value: 'Terminé' },
+						{ label: '◎ En cours', value: 'En cours' },
+						{ label: '◇ Concept', value: 'Idée' },
+					].map(s => (
+						<button
+							class="status-tab px-4 py-2 rounded-lg text-xs font-bold transition-all text-[var(--text-secondary)] border border-[var(--border-primary)] hover:border-[var(--border-accent)] hover:text-[var(--text-primary)]"
+							data-filter-type="status"
+							data-filter-value={s.value}
+						>
+							{s.label}
+						</button>
+					))}
+				</div>
+			</div>
+		</div>
+
+		<!-- Projects Grid -->
+		<div id="projects-grid" class="grid md:grid-cols-2 gap-6">
+			{projects.map((project) => {
+				const Icon = categoryIcons[project.category];
+				const sc = statusConfig[project.status];
+				const hasFullCaseStudy = !!(project.problem && project.architectureDecisions?.length);
+
+				return (
+					<div
+						class="project-wrapper group glow-card cursor-pointer flex flex-col h-full"
+						data-category={project.category}
+						data-status={project.status}
+						data-title={project.title.toLowerCase()}
+						data-tech={project.technologies.join(' ').toLowerCase()}
+						data-project={JSON.stringify(project)}
+					>
+						<!-- Header -->
+						<div class="flex items-start justify-between mb-6">
+							<div class="p-3 rounded-xl bg-[var(--acc-blue)]/10 text-[var(--acc-blue)]">
+								<Icon size={22} />
+							</div>
+							<div class="flex items-center gap-2">
+								{hasFullCaseStudy && (
+									<span class="badge badge-blue text-[10px]">Case Study</span>
+								)}
+								<span class={`badge border text-[10px] ${sc.classes}`}>
+									<span class={`w-1.5 h-1.5 rounded-full ${sc.dot}`}></span>
+									{project.status}
+								</span>
+							</div>
+						</div>
+
+						<!-- Content -->
+						<span class="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)] mb-2">{project.category}</span>
+						<h3 class="text-xl font-bold mb-3 text-[var(--text-primary)] group-hover:text-[var(--acc-blue)] transition-colors leading-snug">
+							{project.title}
+						</h3>
+						<p class="text-sm text-[var(--text-secondary)] leading-relaxed mb-5 flex-grow">
+							{project.description}
+						</p>
+
+						<!-- Problem statement preview -->
+						{project.problem && (
+							<div class="p-3 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-primary)] mb-5">
+								<p class="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-widest mb-1">Problème</p>
+								<p class="text-xs text-[var(--text-secondary)] line-clamp-2 leading-relaxed">{project.problem}</p>
+							</div>
+						)}
+
+						<!-- Tech stack -->
+						<div class="flex flex-wrap gap-1.5 mb-5">
+							{project.technologies.slice(0, 5).map(tech => (
+								<span class="px-2 py-1 rounded-md text-[10px] font-semibold bg-[var(--border-primary)] text-[var(--text-muted)] border border-[var(--border-primary)]">
+									{tech}
+								</span>
+							))}
+							{project.technologies.length > 5 && (
+								<span class="px-2 py-1 rounded-md text-[10px] font-semibold text-[var(--text-muted)]">+{project.technologies.length - 5}</span>
+							)}
+						</div>
+
+						<!-- Footer -->
+						<div class="flex items-center justify-between pt-4 border-t border-[var(--border-primary)] mt-auto">
+							<span class="text-xs font-semibold text-[var(--acc-blue)] flex items-center gap-1.5 group-hover:gap-2 transition-all">
+								{hasFullCaseStudy ? 'Lire le case study' : 'Voir les détails'}
+								<ChevronRight size={14} />
+							</span>
+							<div class="flex items-center gap-3">
+								{project.link && (
+									<a href={project.link} target="_blank" rel="noopener" onclick="event.stopPropagation()" class="text-[var(--text-muted)] hover:text-[var(--acc-blue)] transition-colors">
+										<ExternalLink size={15} />
+									</a>
+								)}
+								{project.github && (
+									<a href={project.github} target="_blank" rel="noopener" onclick="event.stopPropagation()" class="text-[var(--text-muted)] hover:text-[var(--acc-blue)] transition-colors">
+										<Github size={15} />
+									</a>
+								)}
+							</div>
+						</div>
+					</div>
+				);
+			})}
+		</div>
+
+		<!-- Empty state -->
+		<div id="empty-state" class="hidden py-20 text-center">
+			<p class="text-[var(--text-secondary)]">Aucun projet ne correspond à votre recherche.</p>
+		</div>
+
+
+		<!-- ═══════════ MODAL ═══════════ -->
+		<div id="project-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 md:p-6">
+			<div id="modal-overlay" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+			<div class="relative w-full max-w-4xl bg-[var(--bg-primary)] border border-[var(--border-primary)] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+
+				<!-- Close -->
+				<button id="close-modal" class="absolute right-5 top-5 z-10 p-2 rounded-lg bg-[var(--card-bg)] border border-[var(--border-primary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:rotate-90 transition-all">
+					<X size={18} />
+				</button>
+
+				<div id="modal-content" class="overflow-y-auto p-6 md:p-10 space-y-8">
+
+					<!-- Modal header -->
+					<div>
+						<div class="flex items-center gap-3 mb-3">
+							<span id="modal-category-badge" class="badge badge-blue text-[10px]"></span>
+							<span id="modal-status-badge" class="badge border text-[10px]"></span>
+							<span id="modal-case-study-badge" class="badge badge-purple text-[10px] hidden">Case Study</span>
+						</div>
+						<h2 id="modal-title" class="text-2xl md:text-3xl font-bold text-[var(--text-primary)] leading-tight mb-3"></h2>
+						<p id="modal-description" class="text-[var(--text-secondary)] leading-relaxed"></p>
+					</div>
+
+					<!-- Problem -->
+					<div id="modal-problem-section" class="hidden">
+						<div class="flex items-center gap-2 mb-3">
+							<AlertTriangle size={16} class="text-amber-500" />
+							<p class="case-label text-amber-500">Problème</p>
+						</div>
+						<div class="p-4 rounded-xl bg-amber-500/5 border border-amber-500/15">
+							<p id="modal-problem" class="text-sm text-[var(--text-secondary)] leading-relaxed"></p>
+						</div>
+					</div>
+
+					<!-- Constraints -->
+					<div id="modal-constraints-section" class="hidden">
+						<p class="case-label mb-3">Contraintes</p>
+						<ul id="modal-constraints" class="grid sm:grid-cols-2 gap-2"></ul>
+					</div>
+
+					<!-- Long description -->
+					<div id="modal-long-desc-section" class="hidden">
+						<p class="case-label mb-3">
+							<Target size={14} class="inline mr-1" />
+							Architecture proposée
+						</p>
+						<p id="modal-long-description" class="text-sm text-[var(--text-secondary)] leading-relaxed"></p>
+					</div>
+
+					<!-- Architecture Decisions -->
+					<div id="modal-adr-section" class="hidden">
+						<p class="case-label mb-3">
+							<GitBranch size={14} class="inline mr-1" />
+							Décisions Architecturales (ADR)
+						</p>
+						<div id="modal-adr" class="space-y-3"></div>
+					</div>
+
+					<!-- Tech requirements -->
+					<div id="modal-tech-req-section" class="hidden">
+						<p class="case-label mb-3">Spécifications Techniques</p>
+						<ul id="modal-tech-requirements" class="grid sm:grid-cols-2 gap-2"></ul>
+					</div>
+
+					<!-- Trade-offs -->
+					<div id="modal-tradeoffs-section" class="hidden">
+						<p class="case-label mb-3">Trade-offs Explicites</p>
+						<div id="modal-tradeoffs" class="space-y-3"></div>
+					</div>
+
+					<!-- Business impact -->
+					<div id="modal-impact-section" class="hidden">
+						<p class="case-label mb-3">Impact Mesuré</p>
+						<div class="p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/15">
+							<p id="modal-business-impact" class="text-sm text-emerald-600 dark:text-emerald-400 font-medium leading-relaxed"></p>
+						</div>
+					</div>
+
+					<!-- Highlights + Stack -->
+					<div class="grid sm:grid-cols-2 gap-6 pt-2 border-t border-[var(--border-primary)]">
+						<div>
+							<p class="case-label mb-3">Points Clés</p>
+							<ul id="modal-highlights" class="space-y-2"></ul>
+						</div>
+						<div>
+							<p class="case-label mb-3">Stack Technique</p>
+							<div id="modal-technologies" class="flex flex-wrap gap-2"></div>
+						</div>
+					</div>
+
+					<!-- External links -->
+					<div id="modal-links" class="flex gap-3 pt-2 hidden">
+						<a id="modal-link-live" href="#" target="_blank" rel="noopener" class="group flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[var(--acc-blue)] text-white text-sm font-semibold hover:opacity-90 transition-opacity">
+							<ExternalLink size={14} /> Voir en ligne
+						</a>
+						<a id="modal-link-github" href="#" target="_blank" rel="noopener" class="group flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[var(--border-primary)] text-[var(--text-secondary)] text-sm font-semibold hover:border-[var(--border-accent)] transition-colors">
+							<Github size={14} /> GitHub
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- CTA -->
+		<div class="mt-24 p-10 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white text-center reveal">
+			<h2 class="text-2xl md:text-3xl font-bold mb-4 font-display">Un projet complexe à architecturer ?</h2>
+			<p class="max-w-xl mx-auto mb-8 text-blue-100/80 leading-relaxed">
+				Je travaille mieux quand les problèmes sont difficiles. Parlons de vos contraintes, vos ambitions de scalabilité et ce que vous voulez construire.
+			</p>
+			<div class="flex flex-col sm:flex-row gap-4 justify-center">
+				<a href="mailto:githubmoseswise@gmail.com" class="px-8 py-3.5 bg-white text-blue-700 font-bold rounded-xl hover:opacity-90 transition-opacity">
+					Démarrer une conversation
+				</a>
+				<a href="https://linkedin.com/in/agbossagamoise" target="_blank" rel="noopener" class="px-8 py-3.5 bg-white/10 border border-white/20 font-bold rounded-xl hover:bg-white/20 transition-colors flex items-center justify-center gap-2">
+					LinkedIn <ArrowUpRight size={16} />
+				</a>
+			</div>
+		</div>
+
+	</div>
+</Layout>
+
+<script>
+	// ── Scroll reveal ──
+	const revealObserver = new IntersectionObserver(
+		entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+		{ threshold: 0.08 }
+	);
+	document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+	// ── Filter & Search ──
+	const searchInput = document.getElementById('search-input') as HTMLInputElement;
+	const filterTabs = document.querySelectorAll('.filter-tab');
+	const statusTabs = document.querySelectorAll('.status-tab');
+	const projectWrappers = document.querySelectorAll('.project-wrapper');
+	const emptyState = document.getElementById('empty-state');
+
+	let currentCategory = 'All';
+	let currentStatus = 'All';
+
+	function updateDisplay() {
+		const search = searchInput.value.toLowerCase();
+		let visible = 0;
+		projectWrappers.forEach((w: any) => {
+			const cat = w.dataset.category;
+			const status = w.dataset.status;
+			const title = w.dataset.title;
+			const tech = w.dataset.tech;
+			const show = (currentCategory === 'All' || cat === currentCategory)
+				&& (currentStatus === 'All' || status === currentStatus)
+				&& (title.includes(search) || tech.includes(search));
+			w.style.display = show ? '' : 'none';
+			if (show) visible++;
+		});
+		emptyState?.classList.toggle('hidden', visible > 0);
+	}
+
+	function setActive(tabs: NodeListOf<Element>, value: string) {
+		tabs.forEach(t => {
+			const active = t.getAttribute('data-filter-value') === value;
+			t.classList.toggle('bg-[var(--text-primary)]', active);
+			t.classList.toggle('text-white', active);
+			t.classList.toggle('dark:text-black', active);
+			t.classList.toggle('border-transparent', active);
+			t.classList.toggle('text-[var(--text-secondary)]', !active);
+		});
+	}
+
+	searchInput?.addEventListener('input', updateDisplay);
+	filterTabs.forEach(t => t.addEventListener('click', () => {
+		currentCategory = t.getAttribute('data-filter-value') || 'All';
+		setActive(filterTabs, currentCategory);
+		updateDisplay();
+	}));
+	statusTabs.forEach(t => t.addEventListener('click', () => {
+		currentStatus = t.getAttribute('data-filter-value') || 'All';
+		setActive(statusTabs, currentStatus);
+		updateDisplay();
+	}));
+	setActive(filterTabs, 'All');
+	setActive(statusTabs, 'All');
+
+	// ── Modal ──
+	const modal = document.getElementById('project-modal');
+	const overlay = document.getElementById('modal-overlay');
+	const closeBtn = document.getElementById('close-modal');
+
+	const statusClasses: Record<string, string> = {
+		'Terminé': 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20',
+		'En cours': 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20',
+		'Idée': 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20',
+	};
+
+	function show(id: string, content: string | null) {
+		const el = document.getElementById(id);
+		if (!el) return;
+		if (content) { el.textContent = content; }
+	}
+
+	function showSection(id: string, condition: boolean) {
+		document.getElementById(id)?.classList.toggle('hidden', !condition);
+	}
+
+	function openModal(wrapper: HTMLElement) {
+		const raw = wrapper.dataset.project || '{}';
+		const p = JSON.parse(raw);
+
+		// Header
+		show('modal-title', p.title);
+		show('modal-description', p.description);
+
+		const catBadge = document.getElementById('modal-category-badge');
+		if (catBadge) catBadge.textContent = p.category;
+
+		const statusBadge = document.getElementById('modal-status-badge');
+		if (statusBadge) {
+			statusBadge.textContent = p.status;
+			statusBadge.className = `badge border text-[10px] ${statusClasses[p.status] || ''}`;
+		}
+
+		const csBadge = document.getElementById('modal-case-study-badge');
+		const hasCS = p.problem && p.architectureDecisions?.length;
+		csBadge?.classList.toggle('hidden', !hasCS);
+
+		// Problem
+		showSection('modal-problem-section', !!p.problem);
+		show('modal-problem', p.problem || null);
+
+		// Constraints
+		showSection('modal-constraints-section', p.constraints?.length > 0);
+		const constraintsList = document.getElementById('modal-constraints');
+		if (constraintsList) {
+			constraintsList.innerHTML = (p.constraints || []).map((c: string) => `
+				<li class="flex items-start gap-2 text-xs text-[var(--text-secondary)] bg-[var(--card-bg)] border border-[var(--border-primary)] rounded-lg p-2.5">
+					<span class="text-amber-500 mt-0.5 flex-shrink-0">—</span>${c}
+				</li>
+			`).join('');
+		}
+
+		// Long description
+		showSection('modal-long-desc-section', !!p.longDescription);
+		show('modal-long-description', p.longDescription || null);
+
+		// ADR
+		showSection('modal-adr-section', p.architectureDecisions?.length > 0);
+		const adrEl = document.getElementById('modal-adr');
+		if (adrEl) {
+			adrEl.innerHTML = (p.architectureDecisions || []).map((a: any) => `
+				<div class="p-4 rounded-xl border border-[var(--border-primary)] bg-[var(--card-bg)]">
+					<p class="text-sm font-semibold text-[var(--text-primary)] mb-1">✦ ${a.decision}</p>
+					<p class="text-xs text-[var(--text-secondary)] leading-relaxed">${a.rationale}</p>
+				</div>
+			`).join('');
+		}
+
+		// Tech requirements
+		showSection('modal-tech-req-section', p.technicalRequirements?.length > 0);
+		const techReqEl = document.getElementById('modal-tech-requirements');
+		if (techReqEl) {
+			techReqEl.innerHTML = (p.technicalRequirements || []).map((r: string) => `
+				<li class="flex items-start gap-2 text-xs text-[var(--text-secondary)] bg-[var(--card-bg)] border border-[var(--border-primary)] rounded-lg p-2.5">
+					<span class="text-[var(--acc-blue)] mt-0.5 flex-shrink-0">◎</span>${r}
+				</li>
+			`).join('');
+		}
+
+		// Trade-offs
+		showSection('modal-tradeoffs-section', p.tradeoffs?.length > 0);
+		const tradeoffsEl = document.getElementById('modal-tradeoffs');
+		if (tradeoffsEl) {
+			tradeoffsEl.innerHTML = (p.tradeoffs || []).map((t: any) => `
+				<div class="p-4 rounded-xl border border-[var(--border-primary)] bg-[var(--card-bg)]">
+					<p class="text-xs font-bold text-[var(--text-primary)] mb-2">Choice: <span class="text-[var(--acc-blue)]">${t.choice}</span></p>
+					<div class="grid grid-cols-2 gap-3">
+						<div>
+							<p class="text-[10px] font-bold text-emerald-500 uppercase tracking-wider mb-1">Gained</p>
+							<p class="text-xs text-[var(--text-secondary)]">${t.gained}</p>
+						</div>
+						<div>
+							<p class="text-[10px] font-bold text-red-400 uppercase tracking-wider mb-1">Sacrificed</p>
+							<p class="text-xs text-[var(--text-secondary)]">${t.sacrificed}</p>
+						</div>
+					</div>
+				</div>
+			`).join('');
+		}
+
+		// Impact
+		showSection('modal-impact-section', !!p.businessImpact);
+		show('modal-business-impact', p.businessImpact || null);
+
+		// Highlights
+		const highlightsEl = document.getElementById('modal-highlights');
+		if (highlightsEl) {
+			highlightsEl.innerHTML = (p.highlights || []).map((h: string) => `
+				<li class="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
+					<span class="text-[var(--acc-blue)] flex-shrink-0">✦</span>${h}
+				</li>
+			`).join('');
+		}
+
+		// Technologies
+		const techEl = document.getElementById('modal-technologies');
+		if (techEl) {
+			techEl.innerHTML = (p.technologies || []).map((t: string) => `
+				<span class="px-2.5 py-1 rounded-md text-[10px] font-semibold bg-[var(--border-primary)] text-[var(--text-secondary)] border border-[var(--border-primary)]">${t}</span>
+			`).join('');
+		}
+
+		// External links
+		const linksSection = document.getElementById('modal-links');
+		const liveLink = document.getElementById('modal-link-live') as HTMLAnchorElement;
+		const ghLink = document.getElementById('modal-link-github') as HTMLAnchorElement;
+		const hasLinks = !!(p.link || p.github);
+		linksSection?.classList.toggle('hidden', !hasLinks);
+		if (liveLink) { liveLink.href = p.link || '#'; liveLink.classList.toggle('hidden', !p.link); }
+		if (ghLink) { ghLink.href = p.github || '#'; ghLink.classList.toggle('hidden', !p.github); }
+
+		// Show modal
+		modal?.classList.remove('hidden');
+		modal?.classList.add('flex');
+		document.body.style.overflow = 'hidden';
+		// Reset scroll
+		document.getElementById('modal-content')?.scrollTo(0, 0);
+	}
+
+	function closeModal() {
+		modal?.classList.add('hidden');
+		modal?.classList.remove('flex');
+		document.body.style.overflow = '';
+	}
+
+	projectWrappers.forEach(w => w.addEventListener('click', () => openModal(w as HTMLElement)));
+	closeBtn?.addEventListener('click', closeModal);
+	overlay?.addEventListener('click', closeModal);
+	window.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>

@@ -1,0 +1,540 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { ChevronRight, Layers, GitBranch, Cpu, Globe, ArrowUpRight, Code2, Database, Zap, Shield, Target, BookOpen } from 'lucide-react';
+---
+
+<Layout title="Accueil" description="Moïse Agbossaga — Expert Flutter & Développeur Full Stack. Applications mobiles haute performance, offline-first et systèmes scalables orientés impact.">
+
+	<!-- ═══════════════════════════════════════════════ HERO ═══ -->
+	<section class="relative min-h-[calc(100vh-4rem)] flex items-center pt-16 pb-20 overflow-hidden">
+		<!-- Grid background -->
+		<div class="absolute inset-0 grid-pattern -z-20"></div>
+		<!-- Radial glow -->
+		<div class="absolute top-0 left-1/4 w-[700px] h-[500px] -z-10 bg-[radial-gradient(ellipse_at_30%_0%,rgba(59,130,246,0.12)_0%,transparent_65%)]"></div>
+		<div class="absolute bottom-0 right-0 w-[500px] h-[400px] -z-10 bg-[radial-gradient(ellipse_at_100%_100%,rgba(139,92,246,0.08)_0%,transparent_65%)]"></div>
+
+		<div class="container mx-auto px-6">
+			<div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-20">
+
+				<!-- ── Left: text ── -->
+				<div class="flex-1 min-w-0">
+					<!-- Status badge -->
+					<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/5 text-emerald-600 dark:text-emerald-400 text-xs font-semibold mb-8 reveal">
+						<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse inline-block"></span>
+						Disponible pour missions & collaborations
+					</div>
+
+					<!-- Main headline -->
+					<h1 class="text-5xl md:text-6xl xl:text-7xl font-bold mb-6 font-display leading-[1.05] text-[var(--text-primary)] reveal reveal-delay-1">
+						Je conçois des<br/>
+						<span class="gradient-text animate-gradient">systèmes qui durent.</span>
+					</h1>
+
+					<!-- Sub-headline -->
+					<p class="text-lg text-[var(--text-secondary)] mb-4 max-w-xl leading-relaxed reveal reveal-delay-2">
+						<span class="font-semibold text-[var(--text-primary)]">Moïse Agbossaga</span> — Expert Flutter & Développeur Full Stack.
+						Je transforme des exigences complexes en architectures scalables, maintenables et orientées impact.
+					</p>
+
+					<!-- Terminal-style tagline -->
+					<div class="code-block inline-flex flex-wrap items-center gap-3 mb-10 reveal reveal-delay-3">
+						<span class="text-[var(--text-muted)]">$</span>
+						<span class="text-[var(--acc-blue)]">moseswise</span>
+						<span class="text-[var(--text-muted)]">--stack</span>
+						<span class="text-emerald-500 dark:text-emerald-400">Flutter · BLoC · Offline-First · Clean Arch</span>
+						<span class="w-0.5 h-4 bg-[var(--acc-blue)] animate-[blink_1s_ease-in-out_infinite] inline-block"></span>
+					</div>
+
+					<!-- CTA buttons -->
+					<div class="flex flex-col sm:flex-row gap-4 reveal reveal-delay-4">
+						<a href="/portfolio/projets/" class="group px-7 py-4 bg-[var(--acc-blue)] text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 flex items-center justify-center gap-2 hover:-translate-y-0.5">
+							Voir les case studies
+							<ChevronRight size={18} class="group-hover:translate-x-1 transition-transform" />
+						</a>
+						<a href="mailto:githubmoseswise@gmail.com" class="px-7 py-4 border border-[var(--border-primary)] hover:border-[var(--border-accent)] bg-[var(--card-bg)] hover:bg-[var(--card-bg-hover)] font-semibold rounded-xl transition-all duration-300 flex items-center justify-center gap-2 text-[var(--text-primary)]">
+							Me contacter
+						</a>
+						<a href="https://linkedin.com/in/agbossagamoise" target="_blank" rel="noopener" class="px-7 py-4 border border-[var(--border-primary)] hover:border-[var(--border-accent)] bg-[var(--card-bg)] hover:bg-[var(--card-bg-hover)] font-semibold rounded-xl transition-all duration-300 flex items-center justify-center gap-2 text-[var(--text-primary)]">
+							LinkedIn
+							<ArrowUpRight size={16} />
+						</a>
+					</div>
+				</div>
+
+				<!-- ── Right: photo ── -->
+				<div class="flex-shrink-0 reveal reveal-delay-2">
+					<div class="relative">
+						<!-- Glow ring -->
+						<div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600 blur-2xl opacity-20 scale-105 animate-pulse-glow"></div>
+						<!-- Border gradient frame -->
+						<div class="relative p-[3px] rounded-2xl bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600 shadow-2xl shadow-blue-500/20">
+							<div class="rounded-[14px] overflow-hidden w-72 h-96 lg:w-80 lg:h-[440px] xl:w-96 xl:h-[520px] bg-[var(--bg-secondary)]">
+								<img
+									src="/portfolio/images/moses-agbossaga.jpg"
+									alt="Moïse Agbossaga — Expert Flutter & Développeur Full Stack"
+									class="w-full h-full object-cover object-top"
+									loading="eager"
+								/>
+							</div>
+						</div>
+						<!-- Name card overlay -->
+						<div class="absolute -bottom-4 -right-4 bg-[var(--bg-primary)] border border-[var(--border-primary)] rounded-xl px-4 py-3 shadow-xl shadow-black/10">
+							<p class="text-xs font-bold text-[var(--text-primary)]">Moïse Agbossaga</p>
+							<p class="text-[10px] text-[var(--acc-blue)] font-semibold">Chef Développeur · Tinitz</p>
+						</div>
+						<!-- Floating badge -->
+						<div class="absolute -top-3 -left-3 bg-[var(--bg-primary)] border border-[var(--border-primary)] rounded-xl px-3 py-2 shadow-xl shadow-black/10 flex items-center gap-2">
+							<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+							<p class="text-[10px] font-bold text-[var(--text-primary)]">Open to work</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+
+	<!-- ═══════════════════════════════════════════ MÉTRIQUES ═══ -->
+	<section class="py-16 border-y border-[var(--border-primary)] bg-[var(--bg-secondary)]">
+		<div class="container mx-auto px-6">
+			<div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+				{[
+					{ value: '23', label: 'Projets & concepts', suffix: '+' },
+					{ value: '96', label: 'Ressources curatées', suffix: '+' },
+					{ value: '3', label: 'Secteurs majeurs', suffix: '' },
+					{ value: '∞', label: 'Curiosité technique', suffix: '' },
+				].map((m, i) => (
+					<div class={`reveal reveal-delay-${i + 1}`}>
+						<div class="metric-value" data-target={m.value}>{m.value}{m.suffix}</div>
+						<p class="text-sm text-[var(--text-muted)] mt-2 font-medium">{m.label}</p>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+
+	<!-- ══════════════════════════════════ MOBILE MINDSET ═══ -->
+	<section class="py-28 container mx-auto px-6">
+		<div class="text-center mb-16 reveal">
+			<p class="section-label">
+				<Layers size={14} />
+				Mobile Mindset
+			</p>
+			<h2 class="text-3xl md:text-4xl font-bold font-display text-[var(--text-primary)]">
+				Des principes qui guident<br/>chaque app Flutter
+			</h2>
+			<p class="text-[var(--text-secondary)] mt-4 max-w-xl mx-auto">
+				Un bon développeur Flutter ne se contente pas de faire marcher l'app — il pense UX, performance, maintenabilité et contraintes terrain dès le départ.
+			</p>
+		</div>
+
+		<div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+			{[
+				{
+					icon: Layers,
+					color: 'blue',
+					title: 'Clean Architecture Flutter',
+					desc: 'Séparation Domain / Application / Infrastructure dans chaque projet Flutter. La logique métier ne dépend jamais de l\'UI ni des packages. Testabilité maximale.',
+					tags: ['BLoC / GetX', 'Repository Pattern', 'SOLID'],
+					num: '01',
+				},
+				{
+					icon: GitBranch,
+					color: 'purple',
+					title: 'Offline-First & Résilience',
+					desc: 'Les apps mobiles doivent fonctionner sans réseau. SQLite local, synchronisation différentielle, résolution de conflits — conçus pour les zones à faible connectivité.',
+					tags: ['SQLite', 'Hive', 'Sync différentielle'],
+					num: '02',
+				},
+				{
+					icon: Cpu,
+					color: 'cyan',
+					title: 'Performance & UX Fluide',
+					desc: 'Cibler 60fps en permanence : rebuilds minimaux, lazy loading, const widgets, isolates pour les tâches lourdes. L\'utilisateur ne doit jamais attendre.',
+					tags: ['Isolates', 'Const Widgets', 'ListView.builder'],
+					num: '03',
+				},
+				{
+					icon: Shield,
+					color: 'emerald',
+					title: 'Sécurité & Stockage Local',
+					desc: 'Chiffrement AES des données sensibles, flutter_secure_storage pour les tokens, certificate pinning pour les APIs critiques. Sécurité par défaut, pas en option.',
+					tags: ['flutter_secure_storage', 'AES-256', 'SSL Pinning'],
+					num: '04',
+				},
+			].map((p, i) => (
+				<div class={`arch-card relative reveal reveal-delay-${i % 2 + 1}`}>
+					<span class="principle-number text-[var(--text-primary)]">{p.num}</span>
+					<div class={`w-10 h-10 rounded-xl flex items-center justify-center mb-5 ${
+						p.color === 'blue' ? 'bg-blue-500/10 text-blue-500' :
+						p.color === 'purple' ? 'bg-purple-500/10 text-purple-500' :
+						p.color === 'cyan' ? 'bg-cyan-500/10 text-cyan-500' :
+						'bg-emerald-500/10 text-emerald-500'
+					}`}>
+						<p.icon size={20} />
+					</div>
+					<h3 class="text-lg font-bold mb-3 text-[var(--text-primary)]">{p.title}</h3>
+					<p class="text-sm text-[var(--text-secondary)] leading-relaxed mb-5">{p.desc}</p>
+					<div class="flex flex-wrap gap-2">
+						{p.tags.map(t => (
+							<span class={`badge ${
+								p.color === 'blue' ? 'badge-blue' :
+								p.color === 'purple' ? 'badge-purple' :
+								p.color === 'cyan' ? 'badge-cyan' :
+								'badge-emerald'
+							}`}>{t}</span>
+						))}
+					</div>
+				</div>
+			))}
+		</div>
+	</section>
+
+
+	<!-- ═══════════════════════════════ SYSTEM DESIGN SHOWCASE ═══ -->
+	<section class="py-24 bg-[var(--bg-secondary)] border-y border-[var(--border-primary)]">
+		<div class="container mx-auto px-6">
+			<div class="max-w-5xl mx-auto">
+				<div class="mb-14 reveal">
+					<p class="section-label">
+						<Code2 size={14} />
+						System Design Showcase
+					</p>
+					<h2 class="text-3xl md:text-4xl font-bold font-display text-[var(--text-primary)]">
+						Penser en systèmes, pas en fonctionnalités
+					</h2>
+					<p class="text-[var(--text-secondary)] mt-3 max-w-2xl">
+						Exemple de décomposition architecturale d'une plateforme fintech multi-tenant — le type de réflexion que j'applique à chaque projet.
+					</p>
+				</div>
+
+				<div class="grid md:grid-cols-2 gap-8 items-start">
+					<!-- Diagram -->
+					<div class="reveal">
+						<div class="flex items-center gap-2 mb-3">
+							<span class="terminal-dot bg-red-400"></span>
+							<span class="terminal-dot bg-yellow-400"></span>
+							<span class="terminal-dot bg-green-400"></span>
+							<span class="text-xs text-[var(--text-muted)] ml-2 font-mono">architecture.c4</span>
+						</div>
+						<div class="arch-diagram text-[var(--text-secondary)] leading-6">
+							<div class="text-[var(--acc-blue)] font-bold mb-3">// Tontine-Connect Pro — C4 Context</div>
+							<div>
+<pre class="text-xs leading-5">
+┌─────────────────────────────────┐
+│         Load Balancer           │
+│         (Nginx / Caddy)         │
+└──────────────┬──────────────────┘
+               │
+       ┌───────┴────────┐
+       │                │
+┌──────▼──────┐  ┌──────▼──────┐
+│  API Gateway│  │  WebSocket  │
+│  (Laravel)  │  │  Server     │
+└──────┬──────┘  └──────┬──────┘
+       │                │
+┌──────▼──────────────▼─┐
+│      Message Bus       │
+│      (Redis Pub/Sub)   │
+└──┬──────────────┬──────┘
+   │              │
+┌──▼───┐     ┌───▼────┐
+│ Jobs │     │ Events │
+│Queue │     │ Store  │
+└──┬───┘     └───┬────┘
+   │             │
+┌──▼─────────────▼───┐
+│    PostgreSQL DB    │
+│  (partitioned by   │
+│   tenant_id)       │
+└─────────────────────┘
+</pre>
+							</div>
+						</div>
+					</div>
+
+					<!-- Decision log -->
+					<div class="space-y-5 reveal reveal-delay-2">
+						<h3 class="text-base font-bold text-[var(--text-primary)] mb-4">Décisions Architecturales (ADR)</h3>
+						{[
+							{
+								decision: 'PostgreSQL partitionné par tenant',
+								rationale: 'Isolation des données sans complexité opérationnelle d\'un cluster multi-DB. Range partitioning sur tenant_id.',
+								tradeoff: 'Complexité des migrations cross-tenant',
+								status: 'Adopted',
+							},
+							{
+								decision: 'Redis pour les jobs asynchrones',
+								rationale: 'Découplage des notifications SMS/WhatsApp du cycle requête/réponse. Retry automatique avec backoff exponentiel.',
+								tradeoff: 'State distribué à monitorer',
+								status: 'Adopted',
+							},
+							{
+								decision: 'Event Sourcing pour l\'audit trail',
+								rationale: 'Chaque mutation financière est un event immuable. Reconstitution d\'état possible à tout instant.',
+								tradeoff: 'Complexité des projections et lectures',
+								status: 'Proposed',
+							},
+						].map(adr => (
+							<div class="p-4 rounded-xl border border-[var(--border-primary)] bg-[var(--card-bg)] hover:border-[var(--border-accent)] transition-colors">
+								<div class="flex items-start justify-between gap-2 mb-2">
+									<p class="text-sm font-semibold text-[var(--text-primary)]">{adr.decision}</p>
+									<span class={`badge flex-shrink-0 ${adr.status === 'Adopted' ? 'badge-emerald' : 'badge-amber'}`}>{adr.status}</span>
+								</div>
+								<p class="text-xs text-[var(--text-secondary)] mb-2 leading-relaxed">{adr.rationale}</p>
+								<p class="text-xs text-amber-600 dark:text-amber-400">
+									<span class="font-semibold">Trade-off: </span>{adr.tradeoff}
+								</p>
+							</div>
+						))}
+
+						<a href="/portfolio/projets/" class="group flex items-center gap-2 text-sm font-semibold text-[var(--acc-blue)] hover:gap-3 transition-all">
+							Voir tous les case studies
+							<ArrowUpRight size={16} class="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- ═══════════════════════════════════════ STACK & DOMAINES ═══ -->
+	<section class="py-28 container mx-auto px-6">
+		<div class="max-w-5xl mx-auto">
+			<div class="mb-14 reveal">
+				<p class="section-label">
+					<Database size={14} />
+					Stack Technique
+				</p>
+				<h2 class="text-3xl md:text-4xl font-bold font-display text-[var(--text-primary)]">
+					Outils choisis, pas collectionnés
+				</h2>
+			</div>
+
+			<div class="grid md:grid-cols-3 gap-6">
+				{[
+					{
+						category: 'Flutter & Mobile',
+						color: 'blue',
+						items: ['Flutter / Dart', 'React Native', 'BLoC / GetX / Provider', 'Clean Architecture', 'SQLite / Hive', 'Firebase'],
+					},
+					{
+						category: 'Backend & API',
+						color: 'purple',
+						items: ['Laravel (PHP)', 'Node.js / NestJS', 'PostgreSQL / PostGIS', 'Redis', 'REST / WebSocket', 'Docker'],
+					},
+					{
+						category: 'Web & Outillage',
+						color: 'cyan',
+						items: ['React.js / Next.js', 'Astro', 'TypeScript', 'SuperMap / GIS', 'n8n Automation', 'Tailwind CSS'],
+					},
+				].map((col, i) => (
+					<div class={`arch-card reveal reveal-delay-${i + 1}`}>
+						<p class={`case-label ${
+							col.color === 'blue' ? 'text-blue-500' :
+							col.color === 'purple' ? 'text-purple-500' : 'text-cyan-500'
+						}`}>{col.category}</p>
+						<ul class="space-y-2 mt-4">
+							{col.items.map(item => (
+								<li class="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
+									<span class={`w-1 h-1 rounded-full flex-shrink-0 ${
+										col.color === 'blue' ? 'bg-blue-500' :
+										col.color === 'purple' ? 'bg-purple-500' : 'bg-cyan-500'
+									}`}></span>
+									{item}
+								</li>
+							))}
+						</ul>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+
+	<!-- ══════════════════════════════════════════ EXPÉRIENCE ═══ -->
+	<section class="py-24 bg-[var(--bg-secondary)] border-y border-[var(--border-primary)]">
+		<div class="container mx-auto px-6 max-w-5xl">
+			<div class="flex flex-col md:flex-row gap-16 items-start">
+				<div class="md:w-2/5 reveal">
+					<p class="section-label">
+						<Target size={14} />
+						Parcours
+					</p>
+					<h2 class="text-3xl font-bold font-display mb-5 text-[var(--text-primary)]">Expérience de terrain</h2>
+					<p class="text-[var(--text-secondary)] leading-relaxed mb-8">
+						Des produits livrés en production, des systèmes conçus sous contraintes réelles, et une spécialisation marquée en SIG et fintech africaine.
+					</p>
+					<div class="p-5 rounded-xl border border-[var(--border-primary)] bg-[var(--card-bg)]">
+						<p class="case-label">Domaines de spécialisation</p>
+						<div class="flex flex-wrap gap-2 mt-3">
+							{['Flutter / Dart', 'Apps Offline-First', 'SIG / Géospatial', 'Fintech Mobile', 'Laravel Backend', 'React.js'].map(s => (
+								<span class="badge badge-blue">{s}</span>
+							))}
+						</div>
+					</div>
+				</div>
+
+				<div class="md:w-3/5 space-y-10">
+					{[
+						{
+							title: 'Chef Développeur',
+							company: 'TINITZ',
+							period: 'Déc 2024 — Présent',
+							type: 'CDI',
+							desc: 'Leadership technique chez Tinitz, intégrateur de solutions IA et digitales sur mesure — lauréat des Prix PME Digitale et Innovation 2025. Direction du développement mobile Flutter et coordination de l\'équipe technique sur des solutions innovantes à fort impact.',
+							achievements: [
+								{ text: 'ERP Tinitz — système de gestion interne multi-modules', href: 'https://back.tinitz.com/login' },
+								{ text: 'Applications mobiles Flutter TTQ & TDISPLAY (gestion d\'événements)', href: null },
+								{ text: 'Site ARIC Solutions', href: 'https://dev.aricsolutions.com/' },
+								{ text: 'Site Elton Group', href: 'https://dev.elton.ci/' },
+							],
+						},
+						{
+							title: 'Ingénieur Full Stack & Mobile',
+							company: 'EDN COMPUTING GROUP',
+							period: 'Avr 2021 — Nov 2024',
+							type: 'CDI',
+							desc: 'Développement d\'écosystèmes web & mobiles complexes. Applications Flutter offline-first, backends Laravel scalables et systèmes SIG pour des institutions publiques.',
+							achievements: [
+								{ text: 'Développement d\'applications Flutter & React Native en production', href: null },
+								{ text: 'Conception de plateformes web Laravel multi-modules', href: null },
+								{ text: 'Intégration de systèmes SIG pour des institutions publiques', href: null },
+							],
+						},
+						{
+							title: 'Analyste Programmeur & Développeur',
+							company: 'TERRAIN.NET',
+							period: 'Mars 2022 — Févr 2025',
+							type: 'Freelance',
+							desc: 'Conception d\'un CRM terrain pour commerciaux. Plateforme de sondage électoral haute disponibilité. Optimisation de bases de données SQL pour des flux de données massifs.',
+							achievements: [
+								{ text: 'Application de sondage supportant 50 000+ réponses simultanées', href: null },
+								{ text: 'Optimisation requêtes SQL : -60% de temps d\'exécution', href: null },
+								{ text: 'Architecture offline-first pour zones de faible connectivité', href: null },
+							],
+						},
+					].map((exp, i) => (
+						<div class={`group relative pl-8 reveal reveal-delay-${i + 1}`}>
+							<div class="timeline-line group-hover:bg-[var(--acc-blue)] transition-colors"></div>
+							<div class="absolute -left-1.5 top-0 w-3 h-3 rounded-full border-2 border-[var(--border-primary)] bg-[var(--bg-secondary)] group-hover:border-[var(--acc-blue)] group-hover:bg-[var(--acc-blue)] transition-all"></div>
+							<div class="flex items-center gap-3 mb-1">
+								<span class="text-xs font-bold text-[var(--acc-blue)] uppercase tracking-widest">{exp.period}</span>
+								<span class="badge badge-blue">{exp.type}</span>
+							</div>
+							<h3 class="text-xl font-bold mt-1 text-[var(--text-primary)]">{exp.title}</h3>
+							<p class="text-sm font-semibold text-[var(--text-secondary)] mb-4">{exp.company}</p>
+							<p class="text-[var(--text-secondary)] text-sm leading-relaxed mb-4">{exp.desc}</p>
+							<ul class="space-y-1.5">
+								{exp.achievements.map(a => (
+									<li class="flex items-start gap-2 text-xs text-[var(--text-secondary)]">
+										<span class="text-[var(--acc-blue)] mt-0.5 flex-shrink-0">✦</span>
+										{a.href
+											? <a href={a.href} target="_blank" rel="noopener" class="hover:text-[var(--acc-blue)] underline underline-offset-2 transition-colors">{a.text}</a>
+											: <span>{a.text}</span>
+										}
+									</li>
+								))}
+							</ul>
+						</div>
+					))}
+
+					<!-- Certifications -->
+					<div class="pl-8 pt-6 border-t border-[var(--border-primary)] reveal">
+						<p class="case-label mb-4">Certifications</p>
+						<div class="grid sm:grid-cols-2 gap-3">
+							{[
+								{ org: 'Udemy', year: '2024', title: 'Hacking & Cybersécurité' },
+								{ org: 'Udemy', year: '2023', title: 'React & React Native Expert' },
+							].map(cert => (
+								<div class="p-4 rounded-xl bg-[var(--card-bg)] border border-[var(--border-primary)] hover:border-[var(--border-accent)] transition-colors">
+									<p class="text-xs text-[var(--acc-blue)] font-bold mb-1">{cert.org} · {cert.year}</p>
+									<p class="text-sm font-semibold text-[var(--text-primary)]">{cert.title}</p>
+								</div>
+							))}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- ═══════════════════════════════════════════ VISION AFRIQUE ═══ -->
+	<section class="py-24 container mx-auto px-6">
+		<div class="max-w-5xl mx-auto">
+			<div class="reveal">
+				<p class="section-label">
+					<Globe size={14} />
+					Vision & Impact
+				</p>
+				<h2 class="text-3xl md:text-4xl font-bold font-display mb-5 text-[var(--text-primary)]">
+					Architecturer pour des marchés<br/>sous-équipés mais à fort potentiel
+				</h2>
+			</div>
+
+			<div class="grid md:grid-cols-3 gap-6 mt-10">
+				{[
+					{
+						icon: '🌍',
+						title: 'Contexte africain',
+						desc: 'Conception offline-first, gestion de la faible bande passante, intégration Mobile Money (Orange/MTN/Moov), protocoles USSD pour l\'inclusion financière.',
+					},
+					{
+						icon: '⚡',
+						title: 'Contraintes réelles',
+						desc: 'Chaque architecture est pensée sous contraintes : budget limité, infrastructure instable, équipes réduites. La simplicité est une vertu d\'architecte.',
+					},
+					{
+						icon: '📐',
+						title: 'Long terme',
+						desc: 'Un système qu\'on ne peut pas maintenir est un système raté. Je privilégie la lisibilité du code, la testabilité et la documentation vivante.',
+					},
+				].map((v, i) => (
+					<div class={`glow-card reveal reveal-delay-${i + 1}`}>
+						<div class="text-3xl mb-4">{v.icon}</div>
+						<h3 class="text-base font-bold mb-3 text-[var(--text-primary)]">{v.title}</h3>
+						<p class="text-sm text-[var(--text-secondary)] leading-relaxed">{v.desc}</p>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+
+
+	<!-- ═══════════════════════════════════════════════ CTA ═══ -->
+	<section class="py-28 relative overflow-hidden">
+		<div class="absolute inset-0 bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 -z-10"></div>
+		<div class="absolute inset-0 grid-pattern opacity-20 -z-10"></div>
+		<div class="container mx-auto px-6 text-center relative z-10 reveal">
+			<h2 class="text-4xl md:text-5xl font-bold font-display mb-6 text-white">
+				Une app mobile à construire ?
+			</h2>
+			<p class="text-lg max-w-xl mx-auto mb-10 text-blue-100/80 leading-relaxed">
+				Flutter, offline-first, intégration backend, UX mobile — parlons de votre projet et de comment le livrer proprement, dans les délais.
+			</p>
+			<div class="flex flex-col sm:flex-row gap-4 justify-center">
+				<a href="mailto:githubmoseswise@gmail.com" class="px-10 py-4 bg-white text-blue-700 font-bold rounded-xl hover:scale-[1.02] transition-all shadow-2xl shadow-black/20">
+					Démarrer une conversation
+				</a>
+				<a href="https://linkedin.com/in/agbossagamoise" target="_blank" rel="noopener" class="px-10 py-4 bg-white/10 border border-white/20 backdrop-blur-md text-white font-bold rounded-xl hover:bg-white/20 transition-all flex items-center justify-center gap-2">
+					LinkedIn
+					<ArrowUpRight size={16} />
+				</a>
+			</div>
+		</div>
+	</section>
+
+</Layout>
+
+<script>
+	// Scroll reveal
+	const observer = new IntersectionObserver(
+		(entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+		{ threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+	);
+	document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>

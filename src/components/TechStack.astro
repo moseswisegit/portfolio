@@ -1,0 +1,48 @@
+---
+import { Cpu, Globe, smartphone, Database, Cloud } from 'lucide-react';
+
+const techGroups = [
+  {
+    name: 'Frontend',
+    icon: Globe,
+    color: 'text-blue-500',
+    skills: ['React.js', 'Next.js', 'Astro', 'Tailwind CSS']
+  },
+  {
+    name: 'Mobile',
+    icon: smartphone,
+    color: 'text-purple-500',
+    skills: ['Flutter', 'React Native', 'Dart']
+  },
+  {
+    name: 'Backend & Data',
+    icon: Database,
+    color: 'text-emerald-500',
+    skills: ['Laravel', 'Node.js', 'MySQL', 'PostgreSQL', 'Redis']
+  },
+  {
+    name: 'Ops & Advanced',
+    icon: Cloud,
+    color: 'text-amber-500',
+    skills: ['Docker', 'n8n Automation', 'SIG / SuperMap', 'Blockchain']
+  }
+];
+---
+
+<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+  {techGroups.map((group) => (
+    <div class="p-8 rounded-[2rem] bg-[var(--card-bg)] border border-[var(--border-primary)] hover:border-[var(--acc-blue)]/30 transition-all group">
+      <div class={`w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center ${group.color} mb-6 group-hover:scale-110 transition-transform`}>
+        <group.icon size={24} />
+      </div>
+      <h4 class="text-xl font-bold mb-4 text-[var(--text-primary)]">{group.name}</h4>
+      <div class="flex flex-wrap gap-2">
+        {group.skills.map((skill) => (
+          <span class="px-3 py-1 text-[11px] font-semibold bg-[var(--border-primary)] text-[var(--text-secondary)] rounded-lg border border-[var(--border-primary)]">
+            {skill}
+          </span>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>

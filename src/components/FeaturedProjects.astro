@@ -1,0 +1,56 @@
+---
+import { projects } from '../data/projects';
+import { ArrowUpRight, Github, ExternalLink, Layers } from 'lucide-react';
+
+const featuredIds = ['13', '14', '9']; // SaaS Blockchain, Super-App Logistique, Ecosystem Tailleur
+const featuredProjects = projects.filter(p => featuredIds.includes(p.id));
+---
+
+<div class="grid md:grid-cols-3 gap-8">
+  {featuredProjects.map((project) => (
+    <div class="group relative bg-[var(--card-bg)] border border-[var(--border-primary)] rounded-[2rem] overflow-hidden hover:border-[var(--acc-blue)]/50 transition-all duration-500 hover:-translate-y-2 flex flex-col h-full shadow-2xl shadow-black/5 hover:shadow-[var(--acc-blue)]/10">
+      <div class="p-8 flex-grow">
+        <div class="flex items-center justify-between mb-6">
+          <div class="p-3 rounded-2xl bg-[var(--acc-blue)]/10 text-[var(--acc-blue)]">
+            <Layers size={24} />
+          </div>
+          <div class="flex items-center gap-2">
+            {project.github && (
+              <a href={project.github} target="_blank" class="p-2 rounded-full hover:bg-[var(--acc-blue)]/10 text-[var(--text-secondary)] hover:text-[var(--acc-blue)] transition-all">
+                <Github size={18} />
+              </a>
+            )}
+            {project.link && (
+              <a href={project.link} target="_blank" class="p-2 rounded-full hover:bg-[var(--acc-blue)]/10 text-[var(--text-secondary)] hover:text-[var(--acc-blue)] transition-all">
+                <ExternalLink size={18} />
+              </a>
+            )}
+          </div>
+        </div>
+
+        <h3 class="text-2xl font-bold mb-4 text-[var(--text-primary)] group-hover:text-[var(--acc-blue)] transition-colors leading-tight">
+          {project.title}
+        </h3>
+        
+        <p class="text-[var(--text-secondary)] text-base leading-relaxed mb-6 line-clamp-3">
+          {project.description}
+        </p>
+
+        <div class="flex flex-wrap gap-2 mt-auto">
+          {project.technologies.slice(0, 3).map(tech => (
+            <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-[var(--border-primary)] text-[var(--text-secondary)] rounded-lg">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div class="px-8 py-6 bg-[var(--border-primary)]/30 border-t border-[var(--border-primary)] flex items-center justify-between">
+         <span class="text-xs font-bold text-[var(--acc-blue)] uppercase tracking-widest">{project.category}</span>
+         <a href="/portfolio/projets/" class="text-xs font-bold text-[var(--text-primary)] flex items-center gap-1.5 group-hover:gap-2.5 transition-all uppercase tracking-tighter">
+            Détails <ArrowUpRight size={14} />
+         </a>
+      </div>
+    </div>
+  ))}
+</div>
